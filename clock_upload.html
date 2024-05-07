@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Subir y Procesar Archivo CSV</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
+</head>
+<body>
+    <h1>Subir Archivo CSV</h1>
+    <input type="file" id="csvFile" accept=".csv">
+    <button onclick="processAndDisplay()">Procesar y Mostrar</button>
+    <br><br>
+    <table border="1" id="resultsTable">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>ID</th>
+                <th>Fecha</th>
+                <th>Día de la Semana</th>
+                <th>Hora de Salida</th>
+                <th>Minutos Extras Antes de las 21:00</th>
+                <th>Minutos Extras Después de las 21:00</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Data rows will go here -->
+        </tbody>
+    </table>
+    <br>
+    <button onclick="submitData()">Enviar Datos</button>
+    <button onclick="downloadData()">Descargar Datos</button>
+    <script src="processCSV.js"></script>
+
+    <button onclick="window.location.href='index.php';">Return to Home</button>
+
+</body>
+</html>

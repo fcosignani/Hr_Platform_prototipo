@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orden de Trabajo Extraordinario</title>
+    <style>
+        textarea {
+            width: 100%;
+            min-height: 50px;
+            padding: 8px;
+            box-sizing: border-box;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            resize: none; /* Deshabilita el redimensionamiento manual */
+        }
+    </style>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('addTask').addEventListener('click', function () {
+                const section = document.querySelector('section');
+                const article = document.createElement('article');
+                const h3 = document.createElement('h3');
+                h3.textContent = 'Periodo: ';
+
+                const dateInput = document.createElement('input');
+                dateInput.type = 'date';
+                dateInput.required = true;
+                dateInput.onchange = function () { updateDateRange(this); };
+
+                h3.appendChild(dateInput);
+                article.appendChild(h3);
+
+                const p = document.createElement('p');
+                p.textContent = 'Trabajo a ejecutar: ';
+                const textarea = document.createElement('textarea');
+                textarea.required = true;
+                textarea.oninput = function () { adjustTextareaHeight(this); };
+
+                p.appendChild(textarea);
+                article.appendChild(p);
+
+                section.appendChild(article);
+            });
+        });
+
+        function updateDateRange(input) {
+            const selectedDate = new Date(input.value);
+            const minDate = new Date(selectedDate);
+            const maxDate = new Date(selectedDate);
+            minDate.setDate(selectedDate.getDate() - 14); // 2 semanas antes
+            maxDate.setDate(selectedDate.getDate() + 14); // 2 semanas después
+            input.setAttribute('min', minDate.toISOString().split('T')[0]);
+            input.setAttribute('max', maxDate.toISOString().split('T')[0]);
+        }
+
+        function adjustTextareaHeight(textarea) {
+            textarea.style.height = 'auto'; // Resetea la altura
+            textarea.style.height = textarea.scrollHeight + 'px'; // Ajusta la altura basada en el contenido
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <h1>Orden de Trabajo Extraordinario</h1>
+        <p>Fecha: <input type="date" id="fecha" required></p>
+    </header>
+    <section>
+        <h2>Detalles del Trabajo</h2>
+        <!-- Los artículos se agregarán aquí dinámicamente -->
+    </section>
+    <button id="addTask">Agregar Tarea</button>
+    <footer>
+        <p>Firma del Funcionario: _____________________</p>
+        <p>Firma y Timbre Jefe Directo: _____________________</p>
+        <p>Firma y Timbre Director: _____________________</p>
+    </footer>
+
+
+    <button onclick="window.location.href='index.php';">Return to Home</button>
+</body>
+</html>
